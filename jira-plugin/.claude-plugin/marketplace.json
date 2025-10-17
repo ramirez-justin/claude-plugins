@@ -1,0 +1,26 @@
+{
+  "name": "jira-plugins",
+  "owner": {
+    "name": "Jira Plugin Developer",
+    "email": "dev@example.com"
+  },
+  "metadata": {
+    "description": "Jira integration plugins for Claude Code",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "jira",
+      "source": ".",
+      "description": "Complete Jira integration - create, view, search, and manage issues (no MCP required)",
+      "version": "1.0.0",
+      "category": "productivity",
+      "tags": ["jira", "issue-tracking", "atlassian", "project-management"],
+      "author": {
+        "name": "Your Name"
+      },
+      "license": "MIT",
+      "keywords": ["jira", "issues", "atlassian", "project-management"]
+    }
+  ]
+}

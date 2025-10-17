@@ -1,0 +1,28 @@
+{
+  "name": "jira",
+  "version": "1.0.0",
+  "description": "Jira integration plugin for Claude Code - zero dependencies, direct API calls based on OpenAPI spec. Create, view, search, and manage Jira issues with no MCP or external libraries required.",
+  "author": {
+    "name": "Your Name",
+    "email": "your.email@example.com"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/yourusername/jira-plugin",
+  "repository": "https://github.com/yourusername/jira-plugin",
+  "keywords": [
+    "jira",
+    "issue-tracking",
+    "project-management",
+    "atlassian"
+  ],
+  "category": "productivity",
+  "commands": "./commands/",
+  "requiredEnv": [
+    "JIRA_HOST",
+    "JIRA_EMAIL",
+    "JIRA_API_TOKEN"
+  ],
+  "setup": {
+    "instructions": "To use this plugin, you need to configure your Jira credentials:\n\n1. Get your Jira API token from https://id.atlassian.com/manage-profile/security/api-tokens\n2. Add the following to your .claude/settings.json:\n\n{\n  \"env\": {\n    \"JIRA_HOST\": \"your-domain.atlassian.net\",\n    \"JIRA_EMAIL\": \"your-email@example.com\",\n    \"JIRA_API_TOKEN\": \"your-api-token\"\n  }\n}\n\n3. Restart Claude Code\n\nAvailable commands:\n- /jira-create - Create a new Jira issue\n- /jira-get - View issue details\n- /jira-search - Search issues with JQL\n- /jira-my-issues - View your assigned issues\n- /jira-update - Update an issue\n- /jira-comment - Add a comment\n- /jira-transition - Change issue status"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "// INSTRUCTIONS": "Copy the env section below to your .claude/settings.json file and fill in your Jira credentials",
+  "env": {
+    "JIRA_HOST": "your-domain.atlassian.net",
+    "JIRA_EMAIL": "your-email@example.com",
+    "JIRA_API_TOKEN": "your-api-token-here"
+  },
+  "// HOW TO GET API TOKEN": "Visit https://id.atlassian.com/manage-profile/security/api-tokens to create an API token",
+  "// SECURITY NOTE": "Never commit your actual API token to version control!"
+}

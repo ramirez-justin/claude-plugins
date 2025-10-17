@@ -1,0 +1,19 @@
+{
+  "name": "claude-code-jira-plugin",
+  "version": "2.0.0",
+  "description": "Jira integration plugin for Claude Code using direct API calls (no dependencies!)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "claude-code",
+    "jira",
+    "plugin",
+    "issue-tracking",
+    "zero-dependencies"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {}
+}
