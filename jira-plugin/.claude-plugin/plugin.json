@@ -18,6 +18,7 @@
   "category": "productivity",
   "commands": "./commands/",
   "agents": "./agents/",
+  "skills": "./skills/",
   "requiredEnv": [
     "JIRA_HOST",
     "JIRA_EMAIL",
