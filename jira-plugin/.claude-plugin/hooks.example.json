@@ -1,0 +1,30 @@
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "description": "After writing code, remind about Jira tracking",
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "prompt",
+            "prompt": "Code changes detected. Would you like to:\n1. Create a Jira issue to track this work?\n2. Update an existing issue?\n3. Add a comment to document the changes?\n\nI can help with any of these using the Jira plugin commands."
+          }
+        ]
+      },
+      {
+        "description": "After git commit, suggest linking to Jira",
+        "matcher": "Bash.*git commit",
+        "hooks": [
+          {
+            "type": "prompt",
+            "prompt": "Git commit created! Consider:\n- Adding the Jira issue key to the commit message (e.g., 'PROJ-123: Fix login bug')\n- Updating the Jira issue status\n- Adding a comment with commit details\n\nWould you like me to help update Jira?"
+          }
+        ]
+      }
+    ]
+  },
+  "examples": {
+    "description": "These are example hooks. To use them, copy this file to your project's .claude/settings.json under the 'hooks' key",
+    "note": "Hooks are optional - the plugin works without them, but hooks make the workflow more automated"
+  }
+}

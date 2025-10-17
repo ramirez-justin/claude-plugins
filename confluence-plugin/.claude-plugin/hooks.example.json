@@ -1,0 +1,40 @@
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "description": "After creating new API files, suggest documentation",
+        "matcher": "Write.*api/.*\\.js",
+        "hooks": [
+          {
+            "type": "prompt",
+            "prompt": "New API file detected! Consider documenting this in Confluence:\n- Create API documentation page\n- Add endpoint details and examples\n- Update the API index\n\nWould you like me to help create the documentation?"
+          }
+        ]
+      },
+      {
+        "description": "After significant code changes, remind about docs",
+        "matcher": "Edit.*\\.(js|ts|py)",
+        "hooks": [
+          {
+            "type": "prompt",
+            "prompt": "Code changes detected. Documentation considerations:\n- Is there related Confluence documentation to update?\n- Should we create new documentation for this change?\n- Do README files need updates?\n\nI can help search for and update relevant Confluence pages."
+          }
+        ]
+      },
+      {
+        "description": "After README changes, suggest syncing to Confluence",
+        "matcher": "Write|Edit.*README\\.md",
+        "hooks": [
+          {
+            "type": "prompt",
+            "prompt": "README.md updated! This might need to be reflected in Confluence:\n- Sync README content to Confluence page\n- Update project documentation\n- Ensure docs are consistent\n\nWant me to help update Confluence?"
+          }
+        ]
+      }
+    ]
+  },
+  "examples": {
+    "description": "These are example hooks. To use them, copy this file to your project's .claude/settings.json under the 'hooks' key",
+    "note": "Hooks are optional - the plugin works without them, but hooks make documentation maintenance more automated"
+  }
+}

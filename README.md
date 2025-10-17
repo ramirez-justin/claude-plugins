@@ -10,6 +10,34 @@ A collection of zero-dependency plugins for [Claude Code](https://claude.com/cla
 - **Production Ready**: Comprehensive error handling and documentation
 - **Easy to Use**: Simple slash commands in Claude Code
 - **Easy to Extend**: Clean architecture makes adding features straightforward
+- **Seamless Workflow**: Agents and hooks integrate into your development process
+
+## Workflow Integration
+
+These plugins work in **three modes** to fit your workflow:
+
+1. **Manual Commands** - Use slash commands when you need them (works immediately, no setup)
+2. **Agent-Assisted** - AI proactively suggests Jira/Confluence actions based on context (recommended)
+3. **Automated Hooks** - Triggers remind you to update Jira/Confluence based on your actions (advanced)
+
+**See [WORKFLOW.md](./WORKFLOW.md)** for complete integration guide with examples!
+
+### Quick Example: Agent Mode
+
+```
+You: [Write new authentication code]
+
+Claude (Jira Assistant): "I see you've implemented authentication.
+Would you like me to create a Jira issue to track this?"
+
+You: "Yes"
+
+Claude: [Creates PROJ-456 automatically]
+```
+
+**The plugins include intelligent agents:**
+- **Jira Assistant** - Tracks work and suggests issue updates
+- **Documentation Assistant** - Reminds you to update Confluence when code changes
 
 ## Available Plugins
 

@@ -17,6 +17,7 @@
   ],
   "category": "productivity",
   "commands": "./commands/",
+  "agents": "./agents/",
   "requiredEnv": [
     "JIRA_HOST",
     "JIRA_EMAIL",

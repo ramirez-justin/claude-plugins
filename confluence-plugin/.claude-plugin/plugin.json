@@ -17,6 +17,7 @@
   ],
   "category": "productivity",
   "commands": "./commands/",
+  "agents": "./agents/",
   "requiredEnv": [
     "CONFLUENCE_HOST",
     "CONFLUENCE_EMAIL",
