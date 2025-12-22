@@ -97,16 +97,77 @@ class ConfluenceClient {
   }
 
   /**
+   * Convert plain text to Atlassian Document Format (ADF)
+   * Required for API v2 when using atlas_doc_format representation
+   */
+  textToAdf(text) {
+    return {
+      version: 1,
+      type: 'doc',
+      content: text.split('\n\n').map(paragraph => ({
+        type: 'paragraph',
+        content: paragraph ? [{ type: 'text', text: paragraph }] : []
+      }))
+    };
+  }
+
+  /**
    * POST /wiki/api/v2/pages
+   * Note: When using atlas_doc_format, body.value must be a JSON string, not an object
+   * See: https://community.developer.atlassian.com/t/confluence-rest-api-v2-create-page-with-atlas-doc-format-representation/67565
    */
   async createPage(pageData) {
     return this.request('POST', '/pages', pageData);
   }
 
   /**
+   * Create a page with plain text content (convenience method)
+   * Handles ADF conversion automatically
+   */
+  async createPageWithText(spaceId, title, textContent, options = {}) {
+    const adf = this.textToAdf(textContent);
+    const pageData = {
+      spaceId: spaceId,
+      status: options.status || 'current',
+      title: title,
+      body: {
+        representation: 'atlas_doc_format',
+        value: JSON.stringify(adf)  // Must be JSON string, not object
+      }
+    };
+    if (options.parentId) {
+      pageData.parentId = options.parentId;
+    }
+    return this.request('POST', '/pages', pageData);
+  }
+
+  /**
    * PUT /wiki/api/v2/pages/{id}
+   * Note: When using atlas_doc_format, body.value must be a JSON string, not an object
    */
   async updatePage(pageId, updateData) {
+    return this.request('PUT', `/pages/${pageId}`, updateData);
+  }
+
+  /**
+   * Update a page with plain text content (convenience method)
+   * Handles ADF conversion automatically
+   */
+  async updatePageWithText(pageId, title, textContent, version) {
+    const adf = this.textToAdf(textContent);
+    const updateData = {
+      id: pageId,
+      status: 'current',
+      title: title,
+      body: {
+        representation: 'atlas_doc_format',
+        value: JSON.stringify(adf)  // Must be JSON string, not object
+      },
+      version: {
+        number: version + 1,
+        message: 'Updated via API'
+      }
+    };
     return this.request('PUT', `/pages/${pageId}`, updateData);
   }
 
@@ -149,10 +210,74 @@ class ConfluenceClient {
   }
 
   /**
-   * POST /wiki/api/v2/pages/{id}/labels
+   * POST /wiki/rest/api/content/{id}/label
+   * Note: v2 API does not support adding labels yet - must use v1 endpoint
+   * See: https://community.atlassian.com/forums/Confluence-questions/How-to-add-a-label-to-a-Confluence-page-using-the-v2-API/qaq-p/2618944
    */
   async addLabels(pageId, labels) {
-    return this.request('POST', `/pages/${pageId}/labels`, { labels });
+    // Labels API requires v1 endpoint - v2 only has read-only label endpoints
+    const labelArray = Array.isArray(labels)
+      ? labels.map(l => typeof l === 'string' ? { prefix: 'global', name: l } : l)
+      : [{ prefix: 'global', name: labels }];
+
+    return this.requestV1('POST', `/content/${pageId}/label`, labelArray);
+  }
+
+  /**
+   * Make an HTTP request to Confluence API v1 (for endpoints not yet in v2)
+   */
+  async requestV1(method, path, body = null) {
+    return new Promise((resolve, reject) => {
+      const auth = Buffer.from(`${this.email}:${this.apiToken}`).toString('base64');
+
+      const options = {
+        hostname: this.host,
+        port: 443,
+        path: `/wiki/rest/api${path}`,
+        method: method,
+        headers: {
+          'Authorization': `Basic ${auth}`,
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        }
+      };
+
+      const req = https.request(options, (res) => {
+        let data = '';
+
+        res.on('data', (chunk) => {
+          data += chunk;
+        });
+
+        res.on('end', () => {
+          if (res.statusCode >= 200 && res.statusCode < 300) {
+            try {
+              const parsed = data ? JSON.parse(data) : {};
+              resolve(parsed);
+            } catch (e) {
+              resolve(data);
+            }
+          } else {
+            try {
+              const error = JSON.parse(data);
+              reject(new Error(`HTTP ${res.statusCode}: ${error.message || data}`));
+            } catch (e) {
+              reject(new Error(`HTTP ${res.statusCode}: ${data}`));
+            }
+          }
+        });
+      });
+
+      req.on('error', (e) => {
+        reject(e);
+      });
+
+      if (body) {
+        req.write(JSON.stringify(body));
+      }
+
+      req.end();
+    });
   }
 
   /**
