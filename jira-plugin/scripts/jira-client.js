@@ -124,10 +124,27 @@ class JiraClient {
 
   /**
    * POST /rest/api/3/issue/{issueIdOrKey}/comment
+   * Note: API v3 requires Atlassian Document Format (ADF) for comment body
    */
-  async addComment(issueKey, commentBody) {
+  async addComment(issueKey, commentText) {
+    // Convert plain text to ADF format required by API v3
+    const adfBody = {
+      version: 1,
+      type: 'doc',
+      content: [
+        {
+          type: 'paragraph',
+          content: [
+            {
+              type: 'text',
+              text: commentText
+            }
+          ]
+        }
+      ]
+    };
     return this.request('POST', `/issue/${issueKey}/comment`, {
-      body: commentBody
+      body: adfBody
     });
   }
 
