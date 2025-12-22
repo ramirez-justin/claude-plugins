@@ -241,8 +241,7 @@ The Trello Assistant agent proactively helps by:
 ```
 trello-plugin/
 ├── .claude-plugin/
-│   ├── plugin.json         # Plugin manifest
-│   └── marketplace.json    # Marketplace metadata
+│   └── plugin.json         # Plugin manifest
 ├── commands/               # Command definitions
 │   ├── trello-create.md
 │   ├── trello-get.md

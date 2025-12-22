@@ -177,28 +177,30 @@ This plugin uses a minimalist architecture:
 ```
 jira-plugin/
 ├── .claude-plugin/
-│   ├── commands/           # Command definitions
-│   │   ├── jira-create.md
-│   │   ├── jira-get.md
-│   │   ├── jira-search.md
-│   │   ├── jira-my-issues.md
-│   │   ├── jira-update.md
-│   │   ├── jira-comment.md
-│   │   └── jira-transition.md
-│   ├── scripts/            # Direct API integration scripts
-│   │   ├── jira-client.js      # HTTP client (zero dependencies)
-│   │   ├── create-issue.js
-│   │   ├── get-issue.js
-│   │   ├── search-issues.js
-│   │   ├── my-issues.js
-│   │   ├── update-issue.js
-│   │   ├── add-comment.js
-│   │   └── transition-issue.js
-│   ├── plugin.json         # Plugin manifest
-│   └── marketplace.json    # For distribution
+│   └── plugin.json         # Plugin manifest
+├── commands/               # Command definitions
+│   ├── jira-create.md
+│   ├── jira-get.md
+│   ├── jira-search.md
+│   ├── jira-my-issues.md
+│   ├── jira-update.md
+│   ├── jira-comment.md
+│   └── jira-transition.md
+├── scripts/                # Direct API integration scripts
+│   ├── jira-client.js      # HTTP client (zero dependencies)
+│   ├── create-issue.js
+│   ├── get-issue.js
+│   ├── search-issues.js
+│   ├── my-issues.js
+│   ├── update-issue.js
+│   ├── add-comment.js
+│   └── transition-issue.js
+├── agents/                 # AI assistants
+│   └── jira-assistant.md
+├── skills/                 # Specialized workflows
+├── hooks/                  # Event-based automation
 ├── package.json            # No dependencies!
 ├── jira-swagger-v3.v3.json # OpenAPI spec (reference only)
-├── .gitignore
 ├── INSTALL.md
 └── README.md
 ```
@@ -229,13 +231,19 @@ This plugin uses the following Jira REST API v3 endpoints:
 - `GET /rest/api/3/issue/{issueIdOrKey}` - Get issue details
 - `POST /rest/api/3/issue` - Create issue
 - `PUT /rest/api/3/issue/{issueIdOrKey}` - Update issue
-- `GET /rest/api/3/search` - Search issues with JQL
+- `GET /rest/api/3/search/jql` - Search issues with JQL
 - `POST /rest/api/3/issue/{issueIdOrKey}/comment` - Add comment
 - `GET /rest/api/3/issue/{issueIdOrKey}/transitions` - List transitions
 - `POST /rest/api/3/issue/{issueIdOrKey}/transitions` - Transition issue
 - `GET /rest/api/3/myself` - Get current user
 
 Authentication uses Basic Auth with email + API token.
+
+### Important API Notes
+
+- **Search Endpoint**: Uses `/search/jql` (the deprecated `/search` endpoint was removed in 2025)
+- **Comments**: Require Atlassian Document Format (ADF) - the plugin handles conversion automatically
+- **Descriptions**: Also use ADF format for rich text support
 
 ## Troubleshooting
 
@@ -264,13 +272,13 @@ Make sure you've added `JIRA_HOST`, `JIRA_EMAIL`, and `JIRA_API_TOKEN` to your `
 
 ### Adding New Commands
 
-1. Create a new command file in `.claude-plugin/commands/`
-2. Create corresponding script in `.claude-plugin/scripts/`
+1. Create a new command file in `commands/`
+2. Create corresponding script in `scripts/`
 3. Use the `JiraClient` class methods or add new methods as needed
 
 ### Extending the API Client
 
-The `JiraClient` class in `jira-client.js` can be extended with new methods:
+The `JiraClient` class in `scripts/jira-client.js` can be extended with new methods:
 
 ```javascript
 async newMethod(param) {

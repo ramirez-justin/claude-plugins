@@ -1,14 +1,13 @@
 {
   "name": "jira",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Jira integration plugin for Claude Code - zero dependencies, direct API calls based on OpenAPI spec. Create, view, search, and manage Jira issues.",
   "author": {
-    "name": "Your Name",
-    "email": "your.email@example.com"
+    "name": "Justin Ramirez"
   },
   "license": "MIT",
-  "homepage": "https://github.com/yourusername/jira-plugin",
-  "repository": "https://github.com/yourusername/jira-plugin",
+  "homepage": "https://github.com/ramirez-justin/claude-plugins",
+  "repository": "https://github.com/ramirez-justin/claude-plugins",
   "keywords": [
     "jira",
     "issue-tracking",

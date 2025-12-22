@@ -12,12 +12,12 @@
     {
       "name": "jira",
       "source": "./jira-plugin",
-      "description": "Zero-dependency Jira integration for Claude Code."
+      "description": "Zero-dependency Jira integration for Claude Code. Create, search, and manage issues with JQL support."
     },
     {
       "name": "confluence",
       "source": "./confluence-plugin",
-      "description": "Zero-dependency Confluence integration for Claude Code."
+      "description": "Zero-dependency Confluence integration for Claude Code. Create, search, and manage wiki pages with ADF support."
     }
   ]
 }

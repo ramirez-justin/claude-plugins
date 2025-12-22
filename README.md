@@ -1,6 +1,6 @@
 # Claude Code Plugins
 
-A collection of zero-dependency plugins for [Claude Code](https://claude.com/claude-code) that provide direct integrations with popular Atlassian tools using OpenAPI specifications.
+A collection of zero-dependency plugins for [Claude Code](https://claude.com/claude-code) that provide direct integrations with popular project management tools using REST APIs.
 
 ## Why These Plugins?
 
@@ -38,6 +38,7 @@ Claude: [Creates PROJ-456 automatically]
 **The plugins include intelligent agents:**
 - **Jira Assistant** - Tracks work and suggests issue updates
 - **Documentation Assistant** - Reminds you to update Confluence when code changes
+- **Trello Assistant** - Proactive Trello suggestions during development
 
 ## Available Plugins
 
@@ -84,20 +85,48 @@ Complete Confluence integration for wiki and documentation management.
 
 [→ Full Confluence Plugin Documentation](./confluence-plugin/README.md)
 
+### 📋 [Trello Plugin](./trello-plugin)
+
+Complete Trello integration for Kanban/Scrumban workflow management.
+
+**Features:**
+- Create, view, update, move, and archive cards
+- List management and board overview
+- Checklists with item management
+- Comments on cards
+- Search across boards
+- Activity tracking
+- Scrumban workflow optimized
+
+**Commands:**
+- `/trello-create` - Create new card
+- `/trello-get` - View card details
+- `/trello-update` - Update card fields
+- `/trello-move` - Move card between lists
+- `/trello-archive` - Archive a card
+- `/trello-lists` - View board lists
+- `/trello-search` - Search cards
+- `/trello-my-cards` - Your assigned cards
+- `/trello-checklist` - Manage checklists
+- `/trello-comment` - Add comments
+- `/trello-activity` - View board activity
+
+[→ Full Trello Plugin Documentation](./trello-plugin/README.md)
+
 ## Quick Start
 
 ### Installation
 
 1. **Install a plugin** from within Claude Code:
    ```bash
-   /plugin install https://github.com/sethdford/claude-plugins/jira-plugin
-   /plugin install https://github.com/sethdford/claude-plugins/confluence-plugin
+   /install-plugin https://github.com/ramirez-justin/claude-plugins jira
+   /install-plugin https://github.com/ramirez-justin/claude-plugins confluence
+   /install-plugin https://github.com/ramirez-justin/claude-plugins trello
    ```
 
-2. **Get your Atlassian API token**:
-   - Visit https://id.atlassian.com/manage-profile/security/api-tokens
-   - Click "Create API token"
-   - Copy the generated token
+2. **Get your API credentials**:
+   - **Atlassian (Jira/Confluence)**: Visit https://id.atlassian.com/manage-profile/security/api-tokens
+   - **Trello**: Visit https://trello.com/app-key
 
 3. **Configure credentials** in `.claude/settings.json`:
    ```json
@@ -109,7 +138,11 @@ Complete Confluence integration for wiki and documentation management.
 
        "CONFLUENCE_HOST": "your-domain.atlassian.net",
        "CONFLUENCE_EMAIL": "your-email@example.com",
-       "CONFLUENCE_API_TOKEN": "your-api-token"
+       "CONFLUENCE_API_TOKEN": "your-api-token",
+
+       "TRELLO_API_KEY": "your-api-key",
+       "TRELLO_TOKEN": "your-token",
+       "TRELLO_BOARD_ID": "your-board-id"
      }
    }
    ```
@@ -118,21 +151,24 @@ Complete Confluence integration for wiki and documentation management.
    ```
    /jira-my-issues
    /confluence-list-spaces
+   /trello-my-cards
    ```
 
 ## Architecture
 
-Both plugins share the same minimalist architecture:
+All plugins share the same minimalist architecture:
 
 ```
 plugin/
 ├── .claude-plugin/
-│   ├── commands/           # Slash command definitions
-│   ├── scripts/            # Direct API integration scripts
-│   │   └── *-client.js    # Zero-dependency HTTP client
 │   └── plugin.json         # Plugin manifest
+├── commands/               # Slash command definitions
+├── scripts/                # Direct API integration scripts
+│   └── *-client.js         # Zero-dependency HTTP client
+├── agents/                 # AI assistant agents
+├── skills/                 # Specialized workflows
+├── hooks/                  # Event-based automation
 ├── package.json            # No dependencies!
-├── *-openapi-*.json       # OpenAPI spec (reference)
 └── README.md
 ```
 
@@ -165,17 +201,28 @@ Our approach:
 - `GET /rest/api/3/issue/{key}` - Get issue
 - `POST /rest/api/3/issue` - Create issue
 - `PUT /rest/api/3/issue/{key}` - Update issue
-- `GET /rest/api/3/search` - Search with JQL
-- `POST /rest/api/3/issue/{key}/comment` - Add comment
+- `GET /rest/api/3/search/jql` - Search with JQL
+- `POST /rest/api/3/issue/{key}/comment` - Add comment (uses ADF format)
 - `POST /rest/api/3/issue/{key}/transitions` - Transition issue
 
 ### Confluence Plugin (REST API v2)
 - `GET /wiki/api/v2/pages/{id}` - Get page
-- `POST /wiki/api/v2/pages` - Create page
-- `PUT /wiki/api/v2/pages/{id}` - Update page
+- `POST /wiki/api/v2/pages` - Create page (uses ADF format)
+- `PUT /wiki/api/v2/pages/{id}` - Update page (uses ADF format)
 - `DELETE /wiki/api/v2/pages/{id}` - Delete page
 - `GET /wiki/api/v2/pages` - Search pages
 - `GET /wiki/api/v2/spaces` - List spaces
+- `POST /wiki/rest/api/content/{id}/label` - Add labels (v1 API - v2 not available)
+
+### Trello Plugin (REST API)
+- `GET /1/boards/{id}` - Get board
+- `GET /1/boards/{id}/lists` - Get lists
+- `GET /1/cards/{id}` - Get card
+- `POST /1/cards` - Create card
+- `PUT /1/cards/{id}` - Update card
+- `GET /1/search` - Search cards
+- `POST /1/cards/{id}/actions/comments` - Add comment
+- `GET /1/checklists/{id}` - Manage checklists
 
 ## Contributing
 
@@ -192,9 +239,11 @@ Contributions are welcome! To add a new plugin or enhance existing ones:
 ### Adding New Features
 
 Each plugin can be extended by:
-1. Adding new methods to the `*-client.js` file
-2. Creating new scripts in `.claude-plugin/scripts/`
-3. Adding new command files in `.claude-plugin/commands/`
+1. Adding new methods to the `*-client.js` file in `scripts/`
+2. Creating new scripts in `scripts/`
+3. Adding new command files in `commands/`
+4. Adding new agents in `agents/`
+5. Creating specialized skills in `skills/`
 
 ### Testing Locally
 
@@ -241,12 +290,11 @@ MIT
 
 Built using:
 - Node.js built-in `https` module
-- Jira REST API v3 (OpenAPI specification)
-- Confluence REST API v2 (OpenAPI specification)
+- Jira REST API v3
+- Confluence REST API v2
+- Trello REST API
 - [Claude Code](https://claude.com/claude-code) - AI-powered coding assistant
 
 ---
 
 **Zero dependencies. Zero MCP. Zero hassle.**
-
-Made with ❤️ for the Claude Code community

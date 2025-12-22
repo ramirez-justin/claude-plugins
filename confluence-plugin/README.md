@@ -141,25 +141,28 @@ This plugin uses a minimalist architecture:
 ```
 confluence-plugin/
 ├── .claude-plugin/
-│   ├── commands/           # Command definitions
-│   │   ├── confluence-create-page.md
-│   │   ├── confluence-get-page.md
-│   │   ├── confluence-search-pages.md
-│   │   ├── confluence-list-spaces.md
-│   │   ├── confluence-update-page.md
-│   │   └── confluence-delete-page.md
-│   ├── scripts/            # Direct API integration scripts
-│   │   ├── confluence-client.js    # HTTP client (zero dependencies)
-│   │   ├── create-page.js
-│   │   ├── get-page.js
-│   │   ├── search-pages.js
-│   │   ├── list-spaces.js
-│   │   ├── update-page.js
-│   │   └── delete-page.js
 │   └── plugin.json         # Plugin manifest
+├── commands/               # Command definitions
+│   ├── confluence-create-page.md
+│   ├── confluence-get-page.md
+│   ├── confluence-search-pages.md
+│   ├── confluence-list-spaces.md
+│   ├── confluence-update-page.md
+│   └── confluence-delete-page.md
+├── scripts/                # Direct API integration scripts
+│   ├── confluence-client.js    # HTTP client (zero dependencies)
+│   ├── create-page.js
+│   ├── get-page.js
+│   ├── search-pages.js
+│   ├── list-spaces.js
+│   ├── update-page.js
+│   └── delete-page.js
+├── agents/                 # AI assistants
+│   └── documentation-assistant.md
+├── skills/                 # Specialized workflows
+├── hooks/                  # Event-based automation
 ├── package.json            # No dependencies!
 ├── confluence-openapi-v2.v3.json # OpenAPI spec (reference only)
-├── .gitignore
 └── README.md
 ```
 
@@ -193,8 +196,17 @@ This plugin uses the following Confluence REST API v2 endpoints:
 - `GET /wiki/api/v2/pages` - Search pages
 - `GET /wiki/api/v2/spaces` - List spaces
 - `GET /wiki/api/v2/spaces/{id}` - Get space details
+- `GET /wiki/api/v2/pages/{id}/children` - Get child pages
+- `POST /wiki/rest/api/content/{id}/label` - Add labels (v1 API)
 
 Authentication uses Basic Auth with email + API token.
+
+### Important API Notes
+
+- **Labels**: The v2 API does not support adding labels - the plugin uses the v1 API endpoint for this
+- **Page Content**: Uses Atlassian Document Format (ADF) with `atlas_doc_format` representation
+- **ADF Body**: When creating/updating pages, the body value must be a JSON string, not an object
+- **Convenience Methods**: `createPageWithText()` and `updatePageWithText()` handle ADF conversion automatically
 
 ## Content Format
 
@@ -233,13 +245,13 @@ Confluence requires version numbers for updates. Always use `/confluence-get-pag
 
 ### Adding New Commands
 
-1. Create a new command file in `.claude-plugin/commands/`
-2. Create corresponding script in `.claude-plugin/scripts/`
+1. Create a new command file in `commands/`
+2. Create corresponding script in `scripts/`
 3. Use the `ConfluenceClient` class methods or add new methods as needed
 
 ### Extending the API Client
 
-The `ConfluenceClient` class in `confluence-client.js` can be extended with new methods:
+The `ConfluenceClient` class in `scripts/confluence-client.js` can be extended with new methods:
 
 ```javascript
 async newMethod(param) {
