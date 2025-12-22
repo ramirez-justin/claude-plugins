@@ -1,0 +1,16 @@
+{
+  "name": "trello-plugin",
+  "version": "1.0.0",
+  "description": "Zero-dependency Trello integration plugin for Claude Code",
+  "keywords": [
+    "trello",
+    "claude-code",
+    "plugin",
+    "kanban",
+    "scrumban"
+  ],
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

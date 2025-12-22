@@ -1,0 +1,7 @@
+{
+  "env": {
+    "TRELLO_API_KEY": "your-api-key-from-https://trello.com/app-key",
+    "TRELLO_TOKEN": "your-token-generated-from-api-key-page",
+    "TRELLO_BOARD_ID": "your-board-id-from-url"
+  }
+}

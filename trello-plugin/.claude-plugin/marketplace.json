@@ -1,0 +1,18 @@
+{
+  "displayName": "Trello Plugin",
+  "shortDescription": "Zero-dependency Trello integration for Claude Code",
+  "description": "A lightweight Trello integration plugin that uses direct REST API calls. Create, update, search, and manage cards, lists, and checklists. Perfect for Scrumban workflows with full Kanban board support.",
+  "icon": "https://example.com/trello-icon.png",
+  "screenshots": [],
+  "tags": [
+    "trello",
+    "kanban",
+    "scrumban",
+    "project-management",
+    "task-tracking",
+    "productivity"
+  ],
+  "pricing": "free",
+  "supportUrl": "https://github.com/yourusername/trello-plugin/issues",
+  "privacyPolicyUrl": "https://github.com/yourusername/trello-plugin/blob/main/PRIVACY.md"
+}

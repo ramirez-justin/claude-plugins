@@ -1,0 +1,48 @@
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "description": "Suggest creating a Trello card after significant code changes",
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "prompt",
+            "prompt": "I notice you've made code changes. Would you like me to create or update a Trello card to track this work?"
+          }
+        ]
+      },
+      {
+        "description": "Suggest updating card after git commit",
+        "matcher": "Bash.*git commit",
+        "hooks": [
+          {
+            "type": "prompt",
+            "prompt": "I see you've committed code. Should I update a Trello card with this progress or move it to the next list (e.g., In-Progress -> Done)?"
+          }
+        ]
+      },
+      {
+        "description": "Suggest creating card after bug fix",
+        "matcher": "Bash.*fix|Edit.*bug",
+        "hooks": [
+          {
+            "type": "prompt",
+            "prompt": "It looks like you've fixed a bug. Would you like me to create a Trello card to document this fix, or update an existing one?"
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "description": "Check for related Trello cards before starting work",
+        "matcher": "Write.*src/",
+        "hooks": [
+          {
+            "type": "prompt",
+            "prompt": "Before making changes, would you like me to check Trello for any related cards or tasks?"
+          }
+        ]
+      }
+    ]
+  }
+}
