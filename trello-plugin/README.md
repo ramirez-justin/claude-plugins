@@ -241,43 +241,45 @@ The Trello Assistant agent proactively helps by:
 ```
 trello-plugin/
 ├── .claude-plugin/
-│   ├── commands/           # Command definitions
-│   │   ├── trello-create.md
-│   │   ├── trello-get.md
-│   │   ├── trello-update.md
-│   │   ├── trello-move.md
-│   │   ├── trello-archive.md
-│   │   ├── trello-comment.md
-│   │   ├── trello-lists.md
-│   │   ├── trello-search.md
-│   │   ├── trello-my-cards.md
-│   │   ├── trello-checklist.md
-│   │   ├── trello-activity.md
-│   │   └── trello-add-list.md
-│   ├── scripts/            # Direct API scripts
-│   │   ├── trello-client.js
-│   │   ├── create-card.js
-│   │   ├── get-card.js
-│   │   ├── update-card.js
-│   │   ├── archive-card.js
-│   │   ├── move-card.js
-│   │   ├── get-lists.js
-│   │   ├── add-list.js
-│   │   ├── archive-list.js
-│   │   ├── add-comment.js
-│   │   ├── get-comments.js
-│   │   ├── manage-checklist.js
-│   │   ├── search-cards.js
-│   │   ├── my-cards.js
-│   │   └── get-activity.js
-│   ├── agents/
-│   │   └── trello-assistant.md
-│   ├── skills/
-│   │   ├── card-creation/
-│   │   ├── board-planning/
-│   │   └── code-to-card-linking/
-│   ├── plugin.json
-│   └── marketplace.json
+│   ├── plugin.json         # Plugin manifest
+│   └── marketplace.json    # Marketplace metadata
+├── commands/               # Command definitions
+│   ├── trello-create.md
+│   ├── trello-get.md
+│   ├── trello-update.md
+│   ├── trello-move.md
+│   ├── trello-archive.md
+│   ├── trello-comment.md
+│   ├── trello-lists.md
+│   ├── trello-search.md
+│   ├── trello-my-cards.md
+│   ├── trello-checklist.md
+│   ├── trello-activity.md
+│   └── trello-add-list.md
+├── scripts/                # Direct API scripts
+│   ├── trello-client.js
+│   ├── create-card.js
+│   ├── get-card.js
+│   ├── update-card.js
+│   ├── archive-card.js
+│   ├── move-card.js
+│   ├── get-lists.js
+│   ├── add-list.js
+│   ├── archive-list.js
+│   ├── add-comment.js
+│   ├── get-comments.js
+│   ├── manage-checklist.js
+│   ├── search-cards.js
+│   ├── my-cards.js
+│   └── get-activity.js
+├── agents/
+│   └── trello-assistant.md
+├── skills/
+│   ├── card-creation/
+│   ├── board-planning/
+│   └── code-to-card-linking/
+├── hooks/
+│   └── hooks.json          # Event hooks
 ├── package.json
 ├── README.md
 └── INSTALL.md
