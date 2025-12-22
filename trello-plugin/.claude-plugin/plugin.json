@@ -1,31 +1,5 @@
 {
   "name": "trello",
   "version": "1.0.0",
-  "description": "Trello integration plugin for Claude Code - zero dependencies, direct API calls. Create, view, search, and manage Trello cards and boards with no MCP or external libraries required.",
-  "author": {
-    "name": "Your Name",
-    "email": "your.email@example.com"
-  },
-  "license": "MIT",
-  "homepage": "https://github.com/yourusername/trello-plugin",
-  "repository": "https://github.com/yourusername/trello-plugin",
-  "keywords": [
-    "trello",
-    "kanban",
-    "project-management",
-    "task-tracking",
-    "scrumban"
-  ],
-  "category": "productivity",
-  "commands": "./commands/",
-  "agents": "./agents/",
-  "skills": "./skills/",
-  "requiredEnv": [
-    "TRELLO_API_KEY",
-    "TRELLO_TOKEN",
-    "TRELLO_BOARD_ID"
-  ],
-  "setup": {
-    "instructions": "To use this plugin, you need to configure your Trello credentials:\n\n1. Get your Trello API key from https://trello.com/app-key\n2. Generate a token by clicking the 'Token' link on that page\n3. Get your board ID from the board URL (the part after /b/)\n4. Add the following to your .claude/settings.json:\n\n{\n  \"env\": {\n    \"TRELLO_API_KEY\": \"your-api-key\",\n    \"TRELLO_TOKEN\": \"your-token\",\n    \"TRELLO_BOARD_ID\": \"your-board-id\"\n  }\n}\n\n5. Restart Claude Code\n\nAvailable commands:\n- /trello-create - Create a new card\n- /trello-get - View card details\n- /trello-update - Update a card\n- /trello-move - Move card to different list\n- /trello-archive - Archive a card\n- /trello-comment - Add a comment\n- /trello-lists - View board lists\n- /trello-search - Search cards\n- /trello-my-cards - View your assigned cards\n- /trello-checklist - Manage checklists\n- /trello-activity - View recent activity"
-  }
+  "description": "Trello integration plugin for Claude Code - zero dependencies, direct API calls. Create, view, search, and manage Trello cards and boards with no MCP or external libraries required."
 }
