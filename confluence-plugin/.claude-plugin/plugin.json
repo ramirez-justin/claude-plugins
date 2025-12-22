@@ -1,7 +1,7 @@
 {
   "name": "confluence",
   "version": "1.0.0",
-  "description": "Confluence integration plugin for Claude Code - zero dependencies, direct API calls based on OpenAPI spec. Create, view, search, and manage Confluence pages with no MCP or external libraries required.",
+  "description": "Confluence integration plugin for Claude Code - zero dependencies, direct API calls based on OpenAPI spec. Create, view, search, and manage Confluence pages.",
   "author": {
     "name": "Your Name",
     "email": "your.email@example.com"
@@ -14,17 +14,5 @@
     "documentation",
     "wiki",
     "atlassian"
-  ],
-  "category": "productivity",
-  "commands": "./commands/",
-  "agents": "./agents/",
-  "skills": "./skills/",
-  "requiredEnv": [
-    "CONFLUENCE_HOST",
-    "CONFLUENCE_EMAIL",
-    "CONFLUENCE_API_TOKEN"
-  ],
-  "setup": {
-    "instructions": "To use this plugin, you need to configure your Confluence credentials:\n\n1. Get your Confluence API token from https://id.atlassian.com/manage-profile/security/api-tokens\n2. Add the following to your .claude/settings.json:\n\n{\n  \"env\": {\n    \"CONFLUENCE_HOST\": \"your-domain.atlassian.net\",\n    \"CONFLUENCE_EMAIL\": \"your-email@example.com\",\n    \"CONFLUENCE_API_TOKEN\": \"your-api-token\"\n  }\n}\n\n3. Restart Claude Code\n\nAvailable commands:\n- /confluence-create-page - Create a new page\n- /confluence-get-page - View page details\n- /confluence-search-pages - Search pages\n- /confluence-list-spaces - List all spaces\n- /confluence-update-page - Update a page\n- /confluence-delete-page - Delete a page"
-  }
+  ]
 }
