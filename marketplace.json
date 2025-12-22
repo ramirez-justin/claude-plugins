@@ -1,0 +1,23 @@
+{
+  "name": "claude-plugins",
+  "owner": {
+    "name": "Justin Ramirez"
+  },
+  "plugins": [
+    {
+      "name": "trello",
+      "source": "./trello-plugin",
+      "description": "Zero-dependency Trello integration for Claude Code. Manage cards, lists, checklists with Scrumban workflow support."
+    },
+    {
+      "name": "jira",
+      "source": "./jira-plugin",
+      "description": "Zero-dependency Jira integration for Claude Code."
+    },
+    {
+      "name": "confluence",
+      "source": "./confluence-plugin",
+      "description": "Zero-dependency Confluence integration for Claude Code."
+    }
+  ]
+}
