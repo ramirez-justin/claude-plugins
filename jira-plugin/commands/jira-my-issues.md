@@ -1,3 +1,7 @@
+---
+description: View your assigned Jira issues
+---
+
 # Get My Jira Issues
 
 You are helping the user view their assigned Jira issues.

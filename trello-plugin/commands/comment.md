@@ -1,3 +1,7 @@
+---
+description: Add a comment to a Trello card
+---
+
 # Add Comment to Trello Card
 
 You are helping the user add a comment to a Trello card.

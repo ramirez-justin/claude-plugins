@@ -1,3 +1,7 @@
+---
+description: Search for Jira issues using JQL
+---
+
 # Search Jira Issues
 
 You are helping the user search for Jira issues using JQL (Jira Query Language).

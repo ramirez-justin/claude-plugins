@@ -1,3 +1,7 @@
+---
+description: Archive a Trello card
+---
+
 # Archive Trello Card
 
 You are helping the user archive a Trello card.

@@ -1,3 +1,7 @@
+---
+description: Create a new Confluence page
+---
+
 # Create Confluence Page
 
 You are helping the user create a new Confluence page.

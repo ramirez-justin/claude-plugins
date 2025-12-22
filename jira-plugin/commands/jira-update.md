@@ -1,3 +1,7 @@
+---
+description: Update a Jira issue field
+---
+
 # Update Jira Issue
 
 You are helping the user update a Jira issue.

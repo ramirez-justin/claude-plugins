@@ -1,3 +1,7 @@
+---
+description: Add a new list to the Trello board
+---
+
 # Add Trello List
 
 You are helping the user add a new list to their Trello board.

@@ -1,3 +1,7 @@
+---
+description: Move a card to a different list
+---
+
 # Move Trello Card
 
 You are helping the user move a card to a different list.

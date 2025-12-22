@@ -1,3 +1,7 @@
+---
+description: Manage checklists on Trello cards
+---
+
 # Manage Trello Checklists
 
 You are helping the user manage checklists on Trello cards.

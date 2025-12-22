@@ -1,3 +1,7 @@
+---
+description: Add a comment to a Jira issue
+---
+
 # Add Comment to Jira Issue
 
 You are helping the user add a comment to a Jira issue.

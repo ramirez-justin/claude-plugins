@@ -1,3 +1,7 @@
+---
+description: Update an existing Confluence page
+---
+
 # Update Confluence Page
 
 You are helping the user update a Confluence page.

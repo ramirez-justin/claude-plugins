@@ -1,3 +1,7 @@
+---
+description: Delete a Confluence page
+---
+
 # Delete Confluence Page
 
 You are helping the user delete a Confluence page.

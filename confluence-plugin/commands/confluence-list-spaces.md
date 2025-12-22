@@ -1,3 +1,7 @@
+---
+description: List all Confluence spaces
+---
+
 # List Confluence Spaces
 
 You are helping the user list Confluence spaces.

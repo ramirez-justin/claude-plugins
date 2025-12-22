@@ -1,3 +1,7 @@
+---
+description: View lists on the Trello board
+---
+
 # View Trello Board Lists
 
 You are helping the user view the lists on their Trello board.

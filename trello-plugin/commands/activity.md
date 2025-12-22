@@ -1,3 +1,7 @@
+---
+description: View recent activity on the Trello board
+---
+
 # View Trello Board Activity
 
 You are helping the user view recent activity on their Trello board.

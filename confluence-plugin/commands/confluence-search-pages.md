@@ -1,3 +1,7 @@
+---
+description: Search for Confluence pages
+---
+
 # Search Confluence Pages
 
 You are helping the user search for Confluence pages.

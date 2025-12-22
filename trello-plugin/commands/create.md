@@ -1,3 +1,7 @@
+---
+description: Create a new Trello card
+---
+
 # Create Trello Card
 
 You are helping the user create a new Trello card.

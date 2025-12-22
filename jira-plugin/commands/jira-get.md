@@ -1,3 +1,7 @@
+---
+description: View details of a Jira issue
+---
+
 # Get Jira Issue
 
 You are helping the user view details of a Jira issue.

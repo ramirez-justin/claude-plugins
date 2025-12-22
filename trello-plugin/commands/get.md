@@ -1,3 +1,7 @@
+---
+description: View details of a Trello card
+---
+
 # Get Trello Card
 
 You are helping the user view details of a Trello card.

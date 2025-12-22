@@ -1,3 +1,7 @@
+---
+description: Create a new Jira issue
+---
+
 # Create Jira Issue
 
 You are helping the user create a new Jira issue.

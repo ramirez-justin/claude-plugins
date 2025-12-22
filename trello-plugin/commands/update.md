@@ -1,3 +1,7 @@
+---
+description: Update a Trello card field
+---
+
 # Update Trello Card
 
 You are helping the user update a Trello card.

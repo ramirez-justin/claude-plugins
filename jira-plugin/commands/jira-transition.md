@@ -1,3 +1,7 @@
+---
+description: Transition a Jira issue to a new status
+---
+
 # Transition Jira Issue
 
 You are helping the user transition a Jira issue to a new status.

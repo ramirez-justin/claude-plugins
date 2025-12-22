@@ -1,3 +1,7 @@
+---
+description: View cards assigned to you
+---
+
 # View My Trello Cards
 
 You are helping the user view cards assigned to them.

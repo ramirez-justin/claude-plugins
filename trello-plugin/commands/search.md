@@ -1,3 +1,7 @@
+---
+description: Search for Trello cards
+---
+
 # Search Trello Cards
 
 You are helping the user search for cards on Trello.

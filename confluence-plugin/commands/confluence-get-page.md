@@ -1,3 +1,7 @@
+---
+description: View details of a Confluence page
+---
+
 # Get Confluence Page
 
 You are helping the user view details of a Confluence page.
