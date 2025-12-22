@@ -111,7 +111,7 @@ class JiraClient {
   }
 
   /**
-   * GET /rest/api/3/search
+   * GET /rest/api/3/search/jql
    */
   async searchIssues(jql, options = {}) {
     const params = new URLSearchParams({
@@ -119,7 +119,7 @@ class JiraClient {
       maxResults: options.maxResults || 50,
       fields: options.fields?.join(',') || '*all'
     });
-    return this.request('GET', `/search?${params.toString()}`);
+    return this.request('GET', `/search/jql?${params.toString()}`);
   }
 
   /**
