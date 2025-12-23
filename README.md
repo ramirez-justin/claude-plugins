@@ -147,10 +147,14 @@ Agent workflow management for handoffs and session continuity.
 - Context preservation between sessions
 - Structured handoff documentation
 - Session sunset summaries
+- Documentation sync with code changes
 
 **Commands:**
-- `/handoff` - Create handoff document for session continuity
-- `/sunset` - Generate session summary before ending
+- `/handoff` - Resume from handoff document
+- `/sunset` - Create handoff and compact session
+- `/sync-docs` - Update local docs to reflect code changes
+
+[→ Full Workflow Plugin Documentation](./workflow-plugin/README.md)
 
 ### 🔗 [Integration Plugin](./integration-plugin)
 
