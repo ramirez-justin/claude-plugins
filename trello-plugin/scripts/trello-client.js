@@ -6,6 +6,26 @@
  */
 
 const https = require('https');
+const { execSync } = require('child_process');
+
+/**
+ * Resolve environment variable value, handling 1Password references
+ * If value starts with 'op://', uses 1Password CLI to retrieve the secret
+ */
+function resolveEnvValue(value) {
+  if (!value) return value;
+  if (value.startsWith('op://')) {
+    try {
+      return execSync(`op read "${value}"`, { encoding: 'utf8', stdio: ['pipe', 'pipe', 'pipe'] }).trim();
+    } catch (error) {
+      console.error(`Error resolving 1Password reference: ${value}`);
+      console.error('Make sure 1Password CLI is installed and you are signed in.');
+      console.error('Install: https://developer.1password.com/docs/cli/get-started/');
+      process.exit(1);
+    }
+  }
+  return value;
+}
 
 class TrelloClient {
   constructor() {
@@ -26,9 +46,9 @@ class TrelloClient {
       process.exit(1);
     }
 
-    this.apiKey = process.env.TRELLO_API_KEY;
-    this.token = process.env.TRELLO_TOKEN;
-    this.boardId = process.env.TRELLO_BOARD_ID;
+    this.apiKey = resolveEnvValue(process.env.TRELLO_API_KEY);
+    this.token = resolveEnvValue(process.env.TRELLO_TOKEN);
+    this.boardId = resolveEnvValue(process.env.TRELLO_BOARD_ID);
     this.host = 'api.trello.com';
     this.basePath = '/1';
   }

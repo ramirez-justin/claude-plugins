@@ -6,6 +6,26 @@
  */
 
 const https = require('https');
+const { execSync } = require('child_process');
+
+/**
+ * Resolve environment variable value, handling 1Password references
+ * If value starts with 'op://', uses 1Password CLI to retrieve the secret
+ */
+function resolveEnvValue(value) {
+  if (!value) return value;
+  if (value.startsWith('op://')) {
+    try {
+      return execSync(`op read "${value}"`, { encoding: 'utf8', stdio: ['pipe', 'pipe', 'pipe'] }).trim();
+    } catch (error) {
+      console.error(`Error resolving 1Password reference: ${value}`);
+      console.error('Make sure 1Password CLI is installed and you are signed in.');
+      console.error('Install: https://developer.1password.com/docs/cli/get-started/');
+      process.exit(1);
+    }
+  }
+  return value;
+}
 
 class JiraClient {
   constructor() {
@@ -26,9 +46,9 @@ class JiraClient {
       process.exit(1);
     }
 
-    this.host = process.env.JIRA_HOST;
-    this.email = process.env.JIRA_EMAIL;
-    this.apiToken = process.env.JIRA_API_TOKEN;
+    this.host = resolveEnvValue(process.env.JIRA_HOST);
+    this.email = resolveEnvValue(process.env.JIRA_EMAIL);
+    this.apiToken = resolveEnvValue(process.env.JIRA_API_TOKEN);
     this.baseUrl = `/rest/api/3`;
   }
 

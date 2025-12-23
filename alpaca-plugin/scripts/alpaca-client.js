@@ -9,6 +9,26 @@
  */
 
 const https = require('https');
+const { execSync } = require('child_process');
+
+/**
+ * Resolve environment variable value, handling 1Password references
+ * If value starts with 'op://', uses 1Password CLI to retrieve the secret
+ */
+function resolveEnvValue(value) {
+  if (!value) return value;
+  if (value.startsWith('op://')) {
+    try {
+      return execSync(`op read "${value}"`, { encoding: 'utf8', stdio: ['pipe', 'pipe', 'pipe'] }).trim();
+    } catch (error) {
+      console.error(`Error resolving 1Password reference: ${value}`);
+      console.error('Make sure 1Password CLI is installed and you are signed in.');
+      console.error('Install: https://developer.1password.com/docs/cli/get-started/');
+      process.exit(1);
+    }
+  }
+  return value;
+}
 
 class AlpacaClient {
   constructor() {
@@ -29,8 +49,8 @@ class AlpacaClient {
       process.exit(1);
     }
 
-    this.apiKey = process.env.ALPACA_API_KEY;
-    this.apiSecret = process.env.ALPACA_API_SECRET;
+    this.apiKey = resolveEnvValue(process.env.ALPACA_API_KEY);
+    this.apiSecret = resolveEnvValue(process.env.ALPACA_API_SECRET);
 
     // Default to paper trading for safety
     const isPaper = process.env.ALPACA_PAPER !== 'false';
