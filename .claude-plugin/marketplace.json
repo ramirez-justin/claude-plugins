@@ -18,6 +18,16 @@
       "name": "confluence",
       "source": "./confluence-plugin",
       "description": "Zero-dependency Confluence integration for Claude Code. Create, search, and manage wiki pages with ADF support."
+    },
+    {
+      "name": "alpaca",
+      "source": "./alpaca-plugin",
+      "description": "Alpaca Markets trading integration for Claude Code. Trade stocks, crypto, and options with paper or live trading."
+    },
+    {
+      "name": "workflow",
+      "source": "./workflow-plugin",
+      "description": "Agent workflow management tools for Claude Code. Handoffs, context preservation, and session management."
     }
   ]
 }

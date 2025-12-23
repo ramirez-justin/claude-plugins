@@ -39,6 +39,7 @@ Claude: [Creates PROJ-456 automatically]
 - **Jira Assistant** - Tracks work and suggests issue updates
 - **Documentation Assistant** - Reminds you to update Confluence when code changes
 - **Trello Assistant** - Proactive Trello suggestions during development
+- **Trading Assistant** - Monitors positions and suggests trading actions
 
 ## Available Plugins
 
@@ -113,6 +114,43 @@ Complete Trello integration for Kanban/Scrumban workflow management.
 
 [→ Full Trello Plugin Documentation](./trello-plugin/README.md)
 
+### 📈 [Alpaca Plugin](./alpaca-plugin)
+
+Alpaca Markets trading integration for stocks, crypto, and options.
+
+**Features:**
+- Paper and live trading support
+- Real-time quotes and market data
+- Order management (market, limit, stop)
+- Position tracking and account info
+- Historical price bars
+
+**Commands:**
+- `/alpaca-account` - View account info
+- `/alpaca-quote` - Get real-time quotes
+- `/alpaca-order` - Place orders
+- `/alpaca-orders` - View open orders
+- `/alpaca-positions` - View positions
+- `/alpaca-cancel` - Cancel orders
+- `/alpaca-close` - Close positions
+- `/alpaca-clock` - Market hours
+- `/alpaca-bars` - Historical data
+
+[→ Full Alpaca Plugin Documentation](./alpaca-plugin/README.md)
+
+### 🔄 [Workflow Plugin](./workflow-plugin)
+
+Agent workflow management for handoffs and session continuity.
+
+**Features:**
+- Context preservation between sessions
+- Structured handoff documentation
+- Session sunset summaries
+
+**Commands:**
+- `/handoff` - Create handoff document for session continuity
+- `/sunset` - Generate session summary before ending
+
 ## Quick Start
 
 ### Installation
@@ -122,11 +160,14 @@ Complete Trello integration for Kanban/Scrumban workflow management.
    /install-plugin https://github.com/ramirez-justin/claude-plugins jira
    /install-plugin https://github.com/ramirez-justin/claude-plugins confluence
    /install-plugin https://github.com/ramirez-justin/claude-plugins trello
+   /install-plugin https://github.com/ramirez-justin/claude-plugins alpaca
+   /install-plugin https://github.com/ramirez-justin/claude-plugins workflow
    ```
 
 2. **Get your API credentials**:
    - **Atlassian (Jira/Confluence)**: Visit https://id.atlassian.com/manage-profile/security/api-tokens
    - **Trello**: Visit https://trello.com/app-key
+   - **Alpaca**: Visit https://app.alpaca.markets/brokerage/api (paper) or live dashboard
 
 3. **Configure credentials** in `.claude/settings.json`:
    ```json
@@ -142,7 +183,11 @@ Complete Trello integration for Kanban/Scrumban workflow management.
 
        "TRELLO_API_KEY": "your-api-key",
        "TRELLO_TOKEN": "your-token",
-       "TRELLO_BOARD_ID": "your-board-id"
+       "TRELLO_BOARD_ID": "your-board-id",
+
+       "ALPACA_API_KEY": "your-api-key",
+       "ALPACA_SECRET_KEY": "your-secret-key",
+       "ALPACA_PAPER": "true"
      }
    }
    ```
@@ -236,14 +281,24 @@ Contributions are welcome! To add a new plugin or enhance existing ones:
 
 ## Development
 
-### Adding New Features
+### Creating a New Plugin
 
-Each plugin can be extended by:
-1. Adding new methods to the `*-client.js` file in `scripts/`
-2. Creating new scripts in `scripts/`
-3. Adding new command files in `commands/`
-4. Adding new agents in `agents/`
-5. Creating specialized skills in `skills/`
+New plugins follow the architecture described above. Each plugin needs:
+
+1. Plugin directory with `.claude-plugin/plugin.json` manifest
+2. Commands in `commands/*.md` with YAML frontmatter
+3. Scripts in `scripts/*.js` using only Node.js built-ins (zero dependencies)
+4. Registration in `.claude-plugin/marketplace.json` at the repo root
+
+See existing plugins for reference implementations.
+
+### Extending Existing Plugins
+
+Each plugin can be extended by adding:
+- New methods to `scripts/*-client.js`
+- New command files in `commands/`
+- New agents in `agents/`
+- Specialized skills in `skills/`
 
 ### Testing Locally
 
