@@ -1,0 +1,19 @@
+{
+  "name": "alpaca",
+  "version": "1.0.0",
+  "description": "Alpaca Markets trading integration for Claude Code - zero dependencies, direct API calls. Trade stocks, crypto, and options with paper or live trading.",
+  "author": {
+    "name": "Justin Ramirez"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/ramirez-justin/claude-plugins",
+  "repository": "https://github.com/ramirez-justin/claude-plugins",
+  "keywords": [
+    "alpaca",
+    "trading",
+    "stocks",
+    "crypto",
+    "market-data",
+    "paper-trading"
+  ]
+}
