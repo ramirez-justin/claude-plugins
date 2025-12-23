@@ -28,6 +28,11 @@
       "name": "workflow",
       "source": "./workflow-plugin",
       "description": "Agent workflow management tools for Claude Code. Handoffs, context preservation, and session management."
+    },
+    {
+      "name": "integration",
+      "source": "./integration-plugin",
+      "description": "Cross-tool workflow orchestration for Trello, Jira, and Confluence integration."
     }
   ]
 }

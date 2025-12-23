@@ -35,11 +35,12 @@ You: "Yes"
 Claude: [Creates PROJ-456 automatically]
 ```
 
-**The plugins include intelligent agents:**
+**The plugins include intelligent agents and skills:**
 - **Jira Assistant** - Tracks work and suggests issue updates
 - **Documentation Assistant** - Reminds you to update Confluence when code changes
 - **Trello Assistant** - Proactive Trello suggestions during development
 - **Trading Assistant** - Monitors positions and suggests trading actions
+- **Cross-Tool Workflow** - Coordinates work across Trello, Jira, and Confluence
 
 ## Available Plugins
 
@@ -151,6 +152,22 @@ Agent workflow management for handoffs and session continuity.
 - `/handoff` - Create handoff document for session continuity
 - `/sunset` - Generate session summary before ending
 
+### 🔗 [Integration Plugin](./integration-plugin)
+
+Cross-tool workflow orchestration for Trello, Jira, and Confluence.
+
+**Features:**
+- Tool selection guidance (when to use which tool)
+- Cross-tool linking patterns
+- Trello → Jira escalation workflows
+- Release coordination across systems
+- End-to-end traceability
+
+**Skills:**
+- Cross-Tool Workflow Orchestration
+
+[→ Full Integration Plugin Documentation](./integration-plugin/README.md)
+
 ## Quick Start
 
 ### Installation
@@ -162,6 +179,7 @@ Agent workflow management for handoffs and session continuity.
    /install-plugin https://github.com/ramirez-justin/claude-plugins trello
    /install-plugin https://github.com/ramirez-justin/claude-plugins alpaca
    /install-plugin https://github.com/ramirez-justin/claude-plugins workflow
+   /install-plugin https://github.com/ramirez-justin/claude-plugins integration
    ```
 
 2. **Get your API credentials**:

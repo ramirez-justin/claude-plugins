@@ -1,0 +1,10 @@
+{
+  "name": "integration-plugin",
+  "version": "1.0.0",
+  "description": "Cross-tool workflow orchestration for Trello, Jira, and Confluence integration",
+  "author": { "name": "Justin Ramirez" },
+  "license": "MIT",
+  "homepage": "https://github.com/ramirez-justin/claude-plugins",
+  "repository": "https://github.com/ramirez-justin/claude-plugins",
+  "keywords": ["integration", "workflow", "orchestration", "trello", "jira", "confluence"]
+}
