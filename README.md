@@ -172,18 +172,42 @@ Cross-tool workflow orchestration for Trello, Jira, and Confluence.
 
 [→ Full Integration Plugin Documentation](./integration-plugin/README.md)
 
+## Language Server Plugins
+
+LSP plugins provide code intelligence for Claude Code.
+
+| Plugin | Language/Files | Installation |
+|--------|---------------|--------------|
+| [ruff-lsp](./ruff-lsp) | Python (`.py`, `.pyi`) | `pip install ruff` or `uv tool install ruff` |
+| [yaml-ls](./yaml-ls) | YAML (`.yaml`, `.yml`) | `npm install -g yaml-language-server` |
+| [vim-ls](./vim-ls) | VimScript (`.vim`, `.vimrc`) | `npm install -g vim-language-server` |
+| [bash-ls](./bash-ls) | Bash (`.sh`, `.bash`) | `npm install -g bash-language-server` |
+| [docker-ls](./docker-ls) | Dockerfile | `npm install -g dockerfile-language-server-nodejs` |
+| [markdown-oxide](./markdown-oxide) | Markdown (`.md`) | `brew install markdown-oxide` |
+
+**Note:** Ruff is designed to work alongside Pyright for complete Python support (ruff for linting/formatting, pyright for type checking/navigation).
+
 ## Quick Start
 
 ### Installation
 
 1. **Install a plugin** from within Claude Code:
    ```bash
+   # Project management plugins
    /install-plugin https://github.com/ramirez-justin/claude-plugins jira
    /install-plugin https://github.com/ramirez-justin/claude-plugins confluence
    /install-plugin https://github.com/ramirez-justin/claude-plugins trello
    /install-plugin https://github.com/ramirez-justin/claude-plugins alpaca
    /install-plugin https://github.com/ramirez-justin/claude-plugins workflow
    /install-plugin https://github.com/ramirez-justin/claude-plugins integration
+
+   # Language server plugins
+   /install-plugin https://github.com/ramirez-justin/claude-plugins ruff-lsp
+   /install-plugin https://github.com/ramirez-justin/claude-plugins yaml-ls
+   /install-plugin https://github.com/ramirez-justin/claude-plugins vim-ls
+   /install-plugin https://github.com/ramirez-justin/claude-plugins bash-ls
+   /install-plugin https://github.com/ramirez-justin/claude-plugins docker-ls
+   /install-plugin https://github.com/ramirez-justin/claude-plugins markdown-oxide
    ```
 
 2. **Get your API credentials**:

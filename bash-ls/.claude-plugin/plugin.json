@@ -1,0 +1,10 @@
+{
+  "name": "bash-ls",
+  "version": "1.0.0",
+  "description": "Bash language server for Claude Code with shellcheck integration",
+  "author": { "name": "Justin Ramirez" },
+  "license": "MIT",
+  "homepage": "https://github.com/ramirez-justin/claude-plugins",
+  "repository": "https://github.com/ramirez-justin/claude-plugins",
+  "keywords": ["bash", "shell", "shellcheck", "lsp"]
+}

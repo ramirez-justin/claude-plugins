@@ -1,0 +1,10 @@
+{
+  "name": "vim-ls",
+  "version": "1.0.0",
+  "description": "VimScript language server for Claude Code",
+  "author": { "name": "Justin Ramirez" },
+  "license": "MIT",
+  "homepage": "https://github.com/ramirez-justin/claude-plugins",
+  "repository": "https://github.com/ramirez-justin/claude-plugins",
+  "keywords": ["vim", "vimscript", "neovim", "lsp"]
+}

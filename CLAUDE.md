@@ -2,6 +2,49 @@
 
 This repository contains Claude Code plugins. Follow these conventions when working here.
 
+## Python Tooling Preferences
+
+When working with Python projects, prefer these modern tools:
+
+### Package Management: uv (preferred over pip/pip-tools/poetry)
+
+```bash
+# Create virtual environment
+uv venv
+
+# Install dependencies
+uv pip install -r requirements.txt
+uv pip install package-name
+
+# Sync dependencies
+uv sync
+
+# Run Python scripts
+uv run python script.py
+uv run pytest
+```
+
+### Linting & Formatting: ruff (preferred over flake8/black/isort)
+
+```bash
+# Lint
+ruff check .
+ruff check --fix .
+
+# Format
+ruff format .
+
+# Check and format in one command
+ruff check --fix . && ruff format .
+```
+
+### Why These Tools?
+
+- **uv**: 10-100x faster than pip, written in Rust, replaces pip, pip-tools, pipx, poetry, pyenv, and virtualenv
+- **ruff**: 10-100x faster than flake8/black, 800+ lint rules, replaces flake8, black, isort, pydocstyle, pyupgrade, autoflake
+
+Always suggest these tools unless the project explicitly uses different tooling in pyproject.toml or requirements.
+
 ## Creating a New Plugin
 
 When asked to create a new plugin, follow this checklist in order:

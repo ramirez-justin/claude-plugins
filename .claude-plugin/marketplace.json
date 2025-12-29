@@ -33,6 +33,36 @@
       "name": "integration",
       "source": "./integration-plugin",
       "description": "Cross-tool workflow orchestration for Trello, Jira, and Confluence integration."
+    },
+    {
+      "name": "ruff-lsp",
+      "source": "./ruff-lsp",
+      "description": "Python linter and formatter (Ruff) language server for Claude Code."
+    },
+    {
+      "name": "yaml-ls",
+      "source": "./yaml-ls",
+      "description": "YAML language server with JSON Schema validation support."
+    },
+    {
+      "name": "vim-ls",
+      "source": "./vim-ls",
+      "description": "VimScript language server for Vim configuration files."
+    },
+    {
+      "name": "bash-ls",
+      "source": "./bash-ls",
+      "description": "Bash language server with shellcheck and shfmt integration."
+    },
+    {
+      "name": "docker-ls",
+      "source": "./docker-ls",
+      "description": "Dockerfile language server for Docker files."
+    },
+    {
+      "name": "markdown-oxide",
+      "source": "./markdown-oxide",
+      "description": "PKM Markdown language server with wikilink and Obsidian support."
     }
   ]
 }
