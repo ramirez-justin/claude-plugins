@@ -1,0 +1,11 @@
+{
+  "name": "python-lsp",
+  "version": "1.0.0",
+  "description": "Python language server combining Ruff (linting/formatting) and Pyright (types/symbols)",
+  "author": { "name": "Justin Ramirez" },
+  "license": "MIT",
+  "homepage": "https://github.com/ramirez-justin/claude-plugins",
+  "repository": "https://github.com/ramirez-justin/claude-plugins",
+  "keywords": ["python", "linter", "formatter", "ruff", "pyright", "lsp", "type-checking"],
+  "lspServers": "./.lsp.json"
+}
