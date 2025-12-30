@@ -35,9 +35,9 @@
       "description": "Cross-tool workflow orchestration for Trello, Jira, and Confluence integration."
     },
     {
-      "name": "ruff-lsp",
-      "source": "./ruff-lsp",
-      "description": "Python linter and formatter (Ruff) language server for Claude Code."
+      "name": "python-lsp",
+      "source": "./python-lsp",
+      "description": "Python language server with Ruff (linting/formatting) and Pyright (types/symbols)."
     },
     {
       "name": "yaml-ls",

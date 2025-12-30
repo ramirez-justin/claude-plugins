@@ -178,14 +178,14 @@ LSP plugins provide code intelligence for Claude Code.
 
 | Plugin | Language/Files | Installation |
 |--------|---------------|--------------|
-| [ruff-lsp](./ruff-lsp) | Python (`.py`, `.pyi`) | `pip install ruff` or `uv tool install ruff` |
+| [python-lsp](./python-lsp) | Python (`.py`, `.pyi`) | `pip install ruff pyright` |
 | [yaml-ls](./yaml-ls) | YAML (`.yaml`, `.yml`) | `npm install -g yaml-language-server` |
 | [vim-ls](./vim-ls) | VimScript (`.vim`, `.vimrc`) | `npm install -g vim-language-server` |
 | [bash-ls](./bash-ls) | Bash (`.sh`, `.bash`) | `npm install -g bash-language-server` |
 | [docker-ls](./docker-ls) | Dockerfile | `npm install -g dockerfile-language-server-nodejs` |
 | [markdown-oxide](./markdown-oxide) | Markdown (`.md`) | `brew install markdown-oxide` |
 
-**Note:** Ruff is designed to work alongside Pyright for complete Python support (ruff for linting/formatting, pyright for type checking/navigation).
+**Note:** The python-lsp plugin combines Ruff (linting/formatting) and Pyright (type checking/symbol navigation) for complete Python support.
 
 ## Quick Start
 
@@ -202,7 +202,7 @@ LSP plugins provide code intelligence for Claude Code.
    /install-plugin https://github.com/ramirez-justin/claude-plugins integration
 
    # Language server plugins
-   /install-plugin https://github.com/ramirez-justin/claude-plugins ruff-lsp
+   /install-plugin https://github.com/ramirez-justin/claude-plugins python-lsp
    /install-plugin https://github.com/ramirez-justin/claude-plugins yaml-ls
    /install-plugin https://github.com/ramirez-justin/claude-plugins vim-ls
    /install-plugin https://github.com/ramirez-justin/claude-plugins bash-ls
