@@ -1,0 +1,15 @@
+{
+  "vim": {
+    "command": "vim-language-server",
+    "args": ["--stdio"],
+    "extensionToLanguage": {
+      ".vim": "vim"
+    },
+    "filenameToLanguage": {
+      ".vimrc": "vim",
+      "_vimrc": "vim",
+      ".gvimrc": "vim",
+      "_gvimrc": "vim"
+    }
+  }
+}

@@ -6,5 +6,6 @@
   "license": "MIT",
   "homepage": "https://github.com/ramirez-justin/claude-plugins",
   "repository": "https://github.com/ramirez-justin/claude-plugins",
-  "keywords": ["yaml", "schema", "validation", "lsp"]
+  "keywords": ["yaml", "schema", "validation", "lsp"],
+  "lspServers": "./.lsp.json"
 }

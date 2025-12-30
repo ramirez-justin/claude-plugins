@@ -6,5 +6,6 @@
   "license": "MIT",
   "homepage": "https://github.com/ramirez-justin/claude-plugins",
   "repository": "https://github.com/ramirez-justin/claude-plugins",
-  "keywords": ["docker", "dockerfile", "container", "lsp"]
+  "keywords": ["docker", "dockerfile", "container", "lsp"],
+  "lspServers": "./.lsp.json"
 }
