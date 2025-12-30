@@ -211,3 +211,18 @@ Command scripts should:
 | `{plugin}/agents/*.md` | AI assistant agent definitions |
 | `{plugin}/skills/*/` | Specialized workflow skills |
 | `{plugin}/hooks/*.js` | Event-based automation |
+
+## Learnings
+
+### 2025-12-30 Learning: Marketplace Registration is Critical
+
+**Context**: Replaced ruff-lsp with python-lsp (combined ruff + pyright)
+
+**Pattern**: When adding, removing, or renaming plugins:
+1. Update plugin directory
+2. **Update `.claude-plugin/marketplace.json`** - Claude Code reads this file to list available plugins
+3. Update root `README.md` with new plugin info
+
+**Why Effective**: The `marketplace.json` is the source of truth for the `/plugin` command. Without updating it, new plugins won't appear and old ones will show as broken.
+
+**Usage Triggers**: Any plugin add/remove/rename operation
