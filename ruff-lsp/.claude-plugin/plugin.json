@@ -1,20 +1,11 @@
 {
   "name": "ruff-lsp",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Python linter and formatter (Ruff) language server for Claude Code",
   "author": { "name": "Justin Ramirez" },
   "license": "MIT",
   "homepage": "https://github.com/ramirez-justin/claude-plugins",
   "repository": "https://github.com/ramirez-justin/claude-plugins",
   "keywords": ["python", "linter", "formatter", "ruff", "lsp"],
-  "lspServers": {
-    "ruff": {
-      "command": "ruff",
-      "args": ["server"],
-      "extensionToLanguage": {
-        ".py": "python",
-        ".pyi": "python"
-      }
-    }
-  }
+  "lspServers": "./.lsp.json"
 }
