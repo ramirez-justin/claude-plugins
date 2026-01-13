@@ -2,16 +2,6 @@
   "hooks": {
     "PostToolUse": [
       {
-        "description": "After writing code, remind about Jira tracking",
-        "matcher": "Write|Edit",
-        "hooks": [
-          {
-            "type": "prompt",
-            "prompt": "Code changes detected. Would you like to:\n1. Create a Jira issue to track this work?\n2. Update an existing issue?\n3. Add a comment to document the changes?\n\nI can help with any of these using the Jira plugin commands."
-          }
-        ]
-      },
-      {
         "description": "After git commit, suggest linking to Jira",
         "matcher": "Bash.*git commit",
         "hooks": [
