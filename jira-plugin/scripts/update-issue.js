@@ -53,7 +53,7 @@ async function updateIssue() {
         updateData.fields.priority = { name: value };
         break;
       case 'assignee':
-        updateData.fields.assignee = { name: value };
+        updateData.fields.assignee = { accountId: value };
         break;
       default:
         console.error(`Unknown field: ${field}`);
