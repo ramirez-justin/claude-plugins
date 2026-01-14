@@ -13,7 +13,7 @@ You are helping the user create a new Jira issue.
    - Issue summary (title)
    - Issue description
    - Issue type (default: Task, options: Bug, Story, Epic, Task)
-   - Priority (default: Medium, options: Low, Medium, High, Urgent)
+   - Priority (varies by Jira instance, common values: Blocker, Critical, Major, Minor, Trivial)
 
 2. Once you have all the information, use the Bash tool to run:
    ```
@@ -31,6 +31,6 @@ You should ask: "I'll help you create a Jira issue. Please provide:
 - Summary
 - Description
 - Issue type (optional, default: Task)
-- Priority (optional, default: Medium)"
+- Priority (optional, check your Jira instance for valid values)"
 
 After getting the info, run the script and confirm the issue was created.

@@ -144,23 +144,27 @@ Why this work is needed.
 
 ## Priority Guidelines
 
-### 🔴 Highest (P1)
+> **Note**: Priority names vary by Jira instance. Common values include:
+> Blocker, Critical, Major, Minor, Trivial (classic) or Highest, High, Medium,
+> Low, Lowest. Check an existing issue in your project to confirm.
+
+### 🔴 Blocker / Highest
 - Production outages
 - Security vulnerabilities
 - Data loss scenarios
 - Blocking other work
 
-### 🟠 High (P2)
+### 🟠 Critical / High
 - Significant bugs affecting many users
 - Important features with deadlines
 - Performance issues
 
-### 🟡 Medium (P3)
+### 🟡 Major / Medium
 - Minor bugs
 - Feature enhancements
 - Technical debt
 
-### 🟢 Low (P4)
+### 🟢 Minor / Low
 - Nice-to-have features
 - Minor improvements
 - Cosmetic issues

@@ -24,7 +24,7 @@ You are helping the user update a Jira issue.
 
 - **summary**: Issue title
 - **description**: Issue description
-- **priority**: Low, Medium, High, Urgent
+- **priority**: Varies by instance (common: Blocker, Critical, Major, Minor, Trivial)
 - **assignee**: Username of assignee
 
 ## Example Usage
