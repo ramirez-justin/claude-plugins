@@ -16,7 +16,7 @@ async function createIssue() {
     process.exit(1);
   }
 
-  const [project, summary, description, issueType = 'Task', priority = 'Medium'] = args;
+  const [project, summary, description, issueType = 'Task', priority] = args;
 
   const jira = getJiraClient();
 
@@ -46,11 +46,13 @@ async function createIssue() {
         issuetype: {
           name: issueType
         },
-        priority: {
-          name: priority
-        }
       }
     };
+
+    // Only include priority if explicitly provided (avoids "Medium" default mismatch)
+    if (priority) {
+      issueData.fields.priority = { name: priority };
+    }
 
     const issue = await jira.createIssue(issueData);
 
