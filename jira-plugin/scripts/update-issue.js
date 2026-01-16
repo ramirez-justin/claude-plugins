@@ -5,7 +5,7 @@
  * Usage: node update-issue.js <issue-key> <field> <value>
  */
 
-const { getJiraClient } = require('./jira-client');
+const { getJiraClient, textToAdf } = require('./jira-client');
 
 async function updateIssue() {
   const args = process.argv.slice(2);
@@ -32,22 +32,8 @@ async function updateIssue() {
         updateData.fields[field.toLowerCase()] = value;
         break;
       case 'description':
-        // Use ADF format for description
-        updateData.fields.description = {
-          type: 'doc',
-          version: 1,
-          content: [
-            {
-              type: 'paragraph',
-              content: [
-                {
-                  type: 'text',
-                  text: value
-                }
-              ]
-            }
-          ]
-        };
+        // Use ADF format for description with proper formatting support
+        updateData.fields.description = textToAdf(value);
         break;
       case 'priority':
         updateData.fields.priority = { name: value };

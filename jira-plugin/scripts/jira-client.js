@@ -194,4 +194,140 @@ function getJiraClient() {
   return new JiraClient();
 }
 
-module.exports = { getJiraClient, JiraClient };
+/**
+ * Convert plain text or markdown-like text to Atlassian Document Format (ADF)
+ * Supports: paragraphs, headings (## or h2.), bullet lists (- or *),
+ * bold (**text**), inline code (`code`), and links ([text](url))
+ */
+function textToAdf(text) {
+  const content = [];
+
+  // Split by double newlines to get blocks, but preserve single newlines within blocks
+  const blocks = text.split(/\n\n+/);
+
+  for (const block of blocks) {
+    const trimmedBlock = block.trim();
+    if (!trimmedBlock) continue;
+
+    // Check for heading (## Heading or h2. Heading)
+    const headingMatch = trimmedBlock.match(/^(#{1,6})\s+(.+)$/) ||
+                         trimmedBlock.match(/^h([1-6])\.\s+(.+)$/);
+    if (headingMatch) {
+      const level = headingMatch[1].startsWith('#')
+        ? headingMatch[1].length
+        : parseInt(headingMatch[2] ? headingMatch[1] : '2');
+      const headingText = headingMatch[2] || headingMatch[1];
+      content.push({
+        type: 'heading',
+        attrs: { level: Math.min(level, 6) },
+        content: parseInlineFormatting(headingText)
+      });
+      continue;
+    }
+
+    // Check for bullet list (lines starting with - or *)
+    const lines = trimmedBlock.split('\n');
+    const isBulletList = lines.every(line => /^[\-\*]\s+/.test(line.trim()));
+
+    if (isBulletList) {
+      content.push({
+        type: 'bulletList',
+        content: lines.map(line => ({
+          type: 'listItem',
+          content: [{
+            type: 'paragraph',
+            content: parseInlineFormatting(line.replace(/^[\-\*]\s+/, '').trim())
+          }]
+        }))
+      });
+      continue;
+    }
+
+    // Regular paragraph - handle single newlines as hard breaks
+    const paragraphContent = [];
+    const paragraphLines = trimmedBlock.split('\n');
+
+    for (let i = 0; i < paragraphLines.length; i++) {
+      const lineContent = parseInlineFormatting(paragraphLines[i]);
+      paragraphContent.push(...lineContent);
+
+      // Add hard break between lines (but not after the last line)
+      if (i < paragraphLines.length - 1) {
+        paragraphContent.push({ type: 'hardBreak' });
+      }
+    }
+
+    content.push({
+      type: 'paragraph',
+      content: paragraphContent
+    });
+  }
+
+  return {
+    type: 'doc',
+    version: 1,
+    content: content.length > 0 ? content : [{ type: 'paragraph', content: [{ type: 'text', text: ' ' }] }]
+  };
+}
+
+/**
+ * Parse inline formatting: bold (**text** or *text*), code (`text`), links ([text](url) or [text|url])
+ */
+function parseInlineFormatting(text) {
+  const content = [];
+
+  // Regex to match inline formatting
+  // Order matters: check for bold first, then code, then links
+  const pattern = /(\*\*(.+?)\*\*|\*([^*]+?)\*|`([^`]+)`|\[([^\]]+)\]\(([^)]+)\)|\[([^\]|]+)\|([^\]]+)\])/g;
+
+  let lastIndex = 0;
+  let match;
+
+  while ((match = pattern.exec(text)) !== null) {
+    // Add text before the match
+    if (match.index > lastIndex) {
+      content.push({ type: 'text', text: text.slice(lastIndex, match.index) });
+    }
+
+    if (match[2]) {
+      // Bold with ** (e.g., **text**)
+      content.push({ type: 'text', text: match[2], marks: [{ type: 'strong' }] });
+    } else if (match[3]) {
+      // Bold with single * (e.g., *text*) - Jira wiki style
+      content.push({ type: 'text', text: match[3], marks: [{ type: 'strong' }] });
+    } else if (match[4]) {
+      // Inline code (e.g., `code`)
+      content.push({ type: 'text', text: match[4], marks: [{ type: 'code' }] });
+    } else if (match[5] && match[6]) {
+      // Markdown link (e.g., [text](url))
+      content.push({
+        type: 'text',
+        text: match[5],
+        marks: [{ type: 'link', attrs: { href: match[6] } }]
+      });
+    } else if (match[7] && match[8]) {
+      // Jira wiki link (e.g., [text|url])
+      content.push({
+        type: 'text',
+        text: match[7],
+        marks: [{ type: 'link', attrs: { href: match[8] } }]
+      });
+    }
+
+    lastIndex = pattern.lastIndex;
+  }
+
+  // Add remaining text
+  if (lastIndex < text.length) {
+    content.push({ type: 'text', text: text.slice(lastIndex) });
+  }
+
+  // If no content was added, add empty text
+  if (content.length === 0) {
+    content.push({ type: 'text', text: text || ' ' });
+  }
+
+  return content;
+}
+
+module.exports = { getJiraClient, JiraClient, textToAdf };

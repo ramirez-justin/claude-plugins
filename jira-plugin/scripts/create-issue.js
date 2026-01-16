@@ -5,7 +5,7 @@
  * Usage: node create-issue.js <project> <summary> <description> [issueType] [priority]
  */
 
-const { getJiraClient } = require('./jira-client');
+const { getJiraClient, textToAdf } = require('./jira-client');
 
 async function createIssue() {
   const args = process.argv.slice(2);
@@ -28,21 +28,7 @@ async function createIssue() {
           key: project
         },
         summary: summary,
-        description: {
-          type: 'doc',
-          version: 1,
-          content: [
-            {
-              type: 'paragraph',
-              content: [
-                {
-                  type: 'text',
-                  text: description
-                }
-              ]
-            }
-          ]
-        },
+        description: textToAdf(description),
         issuetype: {
           name: issueType
         },
