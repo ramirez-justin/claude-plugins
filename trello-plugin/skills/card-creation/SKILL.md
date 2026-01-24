@@ -16,6 +16,19 @@ Expert assistance for creating well-structured, comprehensive Trello cards from 
 - When discussing a problem that should be documented
 - User asks to "add to the board" or "create a card"
 
+## Superpowers Integration
+
+This skill complements the [superpowers](https://github.com/obra/superpowers) workflow skills. Use superpowers skills **first** for process guidance, then this skill for Trello execution:
+
+| Situation | Use Superpowers First | Then Use This Skill |
+|-----------|----------------------|---------------------|
+| New feature idea | `brainstorming` → explore & design | Create Feature card |
+| Bug discovered | `systematic-debugging` → find root cause | Create Bug card |
+| Planning work | `writing-plans` → break down tasks | Create cards for each step |
+| Work completed | `finishing-a-development-branch` → verify | Move card to Done |
+
+**Key principle**: Superpowers handles the *how* (methodology), this plugin handles the *where* (Trello tracking).
+
 ## Card Types and When to Use Them
 
 ### Bug

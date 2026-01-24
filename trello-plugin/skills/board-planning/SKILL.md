@@ -18,6 +18,24 @@ Expert assistance for managing your Trello board using Scrumban methodology - co
 - Prioritization decisions
 - Identifying bottlenecks
 
+## Superpowers Integration
+
+This skill complements the [superpowers](https://github.com/obra/superpowers) workflow skills:
+
+| Superpowers Skill | How It Relates to Board Planning |
+|-------------------|----------------------------------|
+| `writing-plans` | Creates implementation plans → convert to Trello cards |
+| `executing-plans` | Works through plan steps → track progress on board |
+| `dispatching-parallel-agents` | Parallel work streams → visualize as board columns |
+| `finishing-a-development-branch` | Completion workflow → move cards to Done |
+
+**Workflow example**:
+1. Use `brainstorming` to design a feature
+2. Use `writing-plans` to create implementation steps
+3. Use this skill to create/organize Trello cards for each step
+4. Use `executing-plans` while updating card status
+5. Use `finishing-a-development-branch` and move card to Done
+
 ## Understanding Scrumban
 
 Scrumban combines:

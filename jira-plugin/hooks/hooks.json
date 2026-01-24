@@ -1,20 +1,7 @@
 {
-  "hooks": {
-    "PostToolUse": [
-      {
-        "description": "After git commit, suggest linking to Jira",
-        "matcher": "Bash.*git commit",
-        "hooks": [
-          {
-            "type": "prompt",
-            "prompt": "Git commit created! Consider:\n- Adding the Jira issue key to the commit message (e.g., 'PROJ-123: Fix login bug')\n- Updating the Jira issue status\n- Adding a comment with commit details\n\nWould you like me to help update Jira?"
-          }
-        ]
-      }
-    ]
-  },
-  "examples": {
-    "description": "These are example hooks. To use them, copy this file to your project's .claude/settings.json under the 'hooks' key",
-    "note": "Hooks are optional - the plugin works without them, but hooks make the workflow more automated"
+  "hooks": {},
+  "notes": {
+    "description": "Hooks intentionally left empty to complement superpowers workflows",
+    "recommendation": "Use superpowers skills (brainstorming, writing-plans, finishing-a-development-branch) for workflow guidance. This plugin provides Jira tools - use the jira-plugin agent or /jira-* commands when issue tracking is needed."
   }
 }

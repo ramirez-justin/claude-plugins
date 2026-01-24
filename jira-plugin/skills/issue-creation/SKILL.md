@@ -16,6 +16,19 @@ Expert assistance for creating well-structured, comprehensive Jira issues from a
 - When discussing a problem that should be documented
 - User asks to "open a ticket" or "create an issue"
 
+## Superpowers Integration
+
+This skill complements the [superpowers](https://github.com/obra/superpowers) workflow skills. Use superpowers skills **first** for process guidance, then this skill for Jira execution:
+
+| Situation | Use Superpowers First | Then Use This Skill |
+|-----------|----------------------|---------------------|
+| New feature request | `brainstorming` → design the feature | Create Story with requirements |
+| Complex bug | `systematic-debugging` → find root cause | Create Bug with findings |
+| Multi-step work | `writing-plans` → break down tasks | Create Epic + linked Stories |
+| After completing work | `finishing-a-development-branch` → verify | Update issue status |
+
+**Key principle**: Superpowers handles the *how* (methodology), this plugin handles the *where* (Jira tracking).
+
 ## Issue Types and When to Use Them
 
 ### 🐛 Bug

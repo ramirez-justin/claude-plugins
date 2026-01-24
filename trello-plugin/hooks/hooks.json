@@ -1,28 +1,7 @@
 {
-  "hooks": {
-    "PostToolUse": [
-      {
-        "description": "Suggest updating card after git commit mentioning trello",
-        "matcher": "Bash.*git commit.*[Tt]rello",
-        "hooks": [
-          {
-            "type": "prompt",
-            "prompt": "I see you've committed Trello-related code. Should I update a Trello card with this progress or move it to the next list (e.g., In-Progress -> Done)?"
-          }
-        ]
-      }
-    ],
-    "PreToolUse": [
-      {
-        "description": "Check for related Trello cards before editing trello-plugin files",
-        "matcher": "(?:Write|Edit).*trello-plugin/",
-        "hooks": [
-          {
-            "type": "prompt",
-            "prompt": "Before making changes to the Trello plugin, would you like me to check Trello for any related cards or tasks?"
-          }
-        ]
-      }
-    ]
+  "hooks": {},
+  "notes": {
+    "description": "Hooks intentionally left empty to complement superpowers workflows",
+    "recommendation": "Use superpowers skills (brainstorming, writing-plans, finishing-a-development-branch) for workflow guidance. This plugin provides Trello tools - use the trello-plugin agent or /trello-* commands when card management is needed."
   }
 }

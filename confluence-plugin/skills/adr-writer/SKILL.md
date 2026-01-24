@@ -15,6 +15,23 @@ Expert assistance for creating and maintaining Architecture Decision Records in 
 - Creating technical decision logs
 - User mentions: ADR, architecture, technical decision, design choice
 
+## Superpowers Integration
+
+This skill complements the [superpowers](https://github.com/obra/superpowers) workflow skills. ADRs often emerge from superpowers workflows:
+
+| Superpowers Skill | Creates ADR Opportunity |
+|-------------------|------------------------|
+| `brainstorming` | Technology/approach decisions made during design |
+| `writing-plans` | Architectural choices in implementation plans |
+| `receiving-code-review` | Decisions made in response to review feedback |
+
+**Recommended workflow**:
+1. Use `brainstorming` to explore options and make decisions
+2. Document the decision using this ADR skill in Confluence
+3. Reference the ADR in your implementation plan
+
+**Key principle**: Superpowers handles the decision-making process, this skill captures decisions for posterity.
+
 ## What Are ADRs?
 
 **Architecture Decision Records** document important architectural decisions made during a project:

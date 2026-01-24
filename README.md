@@ -12,6 +12,54 @@ A collection of zero-dependency plugins for [Claude Code](https://claude.com/cla
 - **Easy to Extend**: Clean architecture makes adding features straightforward
 - **Seamless Workflow**: Agents and hooks integrate into your development process
 
+## Works Great with Superpowers
+
+These plugins are designed to **complement** the [superpowers](https://github.com/obra/superpowers) agentic skills framework:
+
+| Layer | Superpowers | These Plugins |
+|-------|-------------|---------------|
+| **Purpose** | Process & methodology | Tool integrations |
+| **Handles** | *How* to work | *Where* to track work |
+| **Skills** | brainstorming, TDD, debugging, planning | Jira, Trello, Confluence, Alpaca |
+
+### Recommended Workflow
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│  1. PROCESS (superpowers)                                   │
+│     brainstorming → writing-plans → executing-plans         │
+├─────────────────────────────────────────────────────────────┤
+│  2. TRACKING (these plugins)                                │
+│     Create Jira issue → Update Trello card → Write docs     │
+├─────────────────────────────────────────────────────────────┤
+│  3. COMPLETION (superpowers + these plugins)                │
+│     finishing-a-development-branch → Move card to Done      │
+└─────────────────────────────────────────────────────────────┘
+```
+
+### Example: Building a Feature
+
+1. **`superpowers:brainstorming`** - Explore the feature design
+2. **`superpowers:writing-plans`** - Create implementation steps
+3. **`trello:card-creation`** - Create cards for each step
+4. **`superpowers:test-driven-development`** - Write tests first
+5. **`superpowers:executing-plans`** - Implement the feature
+6. **`jira:issue-creation`** - Track in Jira if needed
+7. **`superpowers:finishing-a-development-branch`** - Verify and complete
+8. **`trello:move`** - Move card to Done
+
+### Installation Together
+
+```bash
+# Install superpowers for process/methodology
+/install-plugin https://github.com/obra/superpowers
+
+# Install these plugins for tool integrations
+/install-plugin https://github.com/ramirez-justin/claude-plugins trello
+/install-plugin https://github.com/ramirez-justin/claude-plugins jira
+/install-plugin https://github.com/ramirez-justin/claude-plugins confluence
+```
+
 ## Workflow Integration
 
 These plugins work in **three modes** to fit your workflow:
