@@ -147,24 +147,8 @@ class JiraClient {
    * Note: API v3 requires Atlassian Document Format (ADF) for comment body
    */
   async addComment(issueKey, commentText) {
-    // Convert plain text to ADF format required by API v3
-    const adfBody = {
-      version: 1,
-      type: 'doc',
-      content: [
-        {
-          type: 'paragraph',
-          content: [
-            {
-              type: 'text',
-              text: commentText
-            }
-          ]
-        }
-      ]
-    };
     return this.request('POST', `/issue/${issueKey}/comment`, {
-      body: adfBody
+      body: textToAdf(commentText)
     });
   }
 
@@ -200,67 +184,90 @@ function getJiraClient() {
  * bold (**text**), inline code (`code`), and links ([text](url))
  */
 function textToAdf(text) {
+  const lines = text.split('\n');
   const content = [];
+  let i = 0;
 
-  // Split by double newlines to get blocks, but preserve single newlines within blocks
-  const blocks = text.split(/\n\n+/);
+  // Collect consecutive list lines into a list node
+  function collectList() {
+    const items = [];
+    while (i < lines.length && /^\s*[\-\*]\s+/.test(lines[i])) {
+      items.push(lines[i]);
+      i++;
+    }
+    return items;
+  }
 
-  for (const block of blocks) {
-    const trimmedBlock = block.trim();
-    if (!trimmedBlock) continue;
+  while (i < lines.length) {
+    const line = lines[i];
 
-    // Check for heading (## Heading or h2. Heading)
-    const headingMatch = trimmedBlock.match(/^(#{1,6})\s+(.+)$/) ||
-                         trimmedBlock.match(/^h([1-6])\.\s+(.+)$/);
+    // Blank line - skip
+    if (line.trim() === '') {
+      i++;
+      continue;
+    }
+
+    // Heading (## Heading or h2. Heading)
+    const headingMatch = line.match(/^(#{1,6})\s+(.+)$/) ||
+                         line.match(/^h([1-6])\.\s+(.+)$/);
     if (headingMatch) {
       const level = headingMatch[1].startsWith('#')
         ? headingMatch[1].length
-        : parseInt(headingMatch[2] ? headingMatch[1] : '2');
-      const headingText = headingMatch[2] || headingMatch[1];
+        : parseInt(headingMatch[1]);
       content.push({
         type: 'heading',
         attrs: { level: Math.min(level, 6) },
-        content: parseInlineFormatting(headingText)
+        content: parseInlineFormatting(headingMatch[2])
       });
+      i++;
       continue;
     }
 
-    // Check for bullet list (lines starting with - or *)
-    const lines = trimmedBlock.split('\n');
-    const isBulletList = lines.every(line => /^[\-\*]\s+/.test(line.trim()));
+    // List items (- or *)
+    if (/^\s*[\-\*]\s+/.test(line)) {
+      const items = collectList();
+      const isTaskList = items.every(l => /^\s*[\-\*]\s+\[[ x]\]\s+/.test(l));
 
-    if (isBulletList) {
-      content.push({
-        type: 'bulletList',
-        content: lines.map(line => ({
-          type: 'listItem',
-          content: [{
-            type: 'paragraph',
-            content: parseInlineFormatting(line.replace(/^[\-\*]\s+/, '').trim())
-          }]
-        }))
-      });
-      continue;
+      if (isTaskList) {
+        content.push({
+          type: 'taskList',
+          attrs: { localId: '' },
+          content: items.map(l => {
+            const m = l.trim().match(/^[\-\*]\s+\[([ x])\]\s+(.*)$/);
+            return {
+              type: 'taskItem',
+              attrs: { localId: '', state: m[1] === 'x' ? 'DONE' : 'TODO' },
+              content: [{ type: 'paragraph', content: parseInlineFormatting(m[2].trim()) }]
+            };
+          })
+        });
+      } else {
+        content.push({
+          type: 'bulletList',
+          content: items.map(l => ({
+            type: 'listItem',
+            content: [{ type: 'paragraph', content: parseInlineFormatting(l.replace(/^\s*[\-\*]\s+/, '').trim()) }]
+          }))
+        });
+      }
+      continue; // collectList already advanced i
     }
 
-    // Regular paragraph - handle single newlines as hard breaks
+    // Regular paragraph - collect consecutive non-special lines
     const paragraphContent = [];
-    const paragraphLines = trimmedBlock.split('\n');
-
-    for (let i = 0; i < paragraphLines.length; i++) {
-      const lineContent = parseInlineFormatting(paragraphLines[i]);
-      paragraphContent.push(...lineContent);
-
-      // Add hard break between lines (but not after the last line)
-      if (i < paragraphLines.length - 1) {
+    while (i < lines.length && lines[i].trim() !== '' &&
+           !/^(#{1,6}|h[1-6]\.)\s+/.test(lines[i]) &&
+           !/^\s*[\-\*]\s+/.test(lines[i])) {
+      if (paragraphContent.length > 0) {
         paragraphContent.push({ type: 'hardBreak' });
       }
+      paragraphContent.push(...parseInlineFormatting(lines[i]));
+      i++;
     }
 
-    content.push({
-      type: 'paragraph',
-      content: paragraphContent
-    });
+    if (paragraphContent.length > 0) {
+      content.push({ type: 'paragraph', content: paragraphContent });
+    }
   }
 
   return {
