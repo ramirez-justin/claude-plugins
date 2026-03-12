@@ -6,5 +6,6 @@
   "license": "MIT",
   "homepage": "https://github.com/ramirez-justin/claude-plugins",
   "repository": "https://github.com/ramirez-justin/claude-plugins",
-  "keywords": ["markdown", "pkm", "wikilink", "obsidian", "lsp"]
+  "keywords": ["markdown", "pkm", "wikilink", "obsidian", "lsp"],
+  "lspServers": "./.lsp.json"
 }

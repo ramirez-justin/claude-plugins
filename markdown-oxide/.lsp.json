@@ -1,0 +1,9 @@
+{
+  "markdown-oxide": {
+    "command": "markdown-oxide",
+    "args": [],
+    "extensionToLanguage": {
+      ".md": "markdown"
+    }
+  }
+}
