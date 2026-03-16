@@ -167,6 +167,14 @@ class JiraClient {
   }
 
   /**
+   * DELETE /rest/api/3/issue/{issueIdOrKey}
+   * Returns 204 No Content on success.
+   */
+  async deleteIssue(issueKey, deleteSubtasks = false) {
+    return this.request('DELETE', `/issue/${issueKey}?deleteSubtasks=${deleteSubtasks}`);
+  }
+
+  /**
    * GET /rest/api/3/myself
    */
   async getCurrentUser() {
