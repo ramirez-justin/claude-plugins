@@ -1,0 +1,10 @@
+{
+  "name": "fivetran-plugin",
+  "version": "1.0.0",
+  "description": "Zero-dependency Fivetran integration for Claude Code. Check connector status, trigger syncs, and explore schemas.",
+  "author": { "name": "Justin Ramirez" },
+  "license": "MIT",
+  "homepage": "https://github.com/ramirez-justin/claude-plugins",
+  "repository": "https://github.com/ramirez-justin/claude-plugins",
+  "keywords": ["fivetran", "etl", "data", "connectors", "sync"]
+}

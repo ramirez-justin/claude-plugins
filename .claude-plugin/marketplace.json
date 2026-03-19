@@ -58,6 +58,11 @@
       "name": "markdown-oxide",
       "source": "./markdown-oxide",
       "description": "PKM Markdown language server with wikilink and Obsidian support."
+    },
+    {
+      "name": "fivetran",
+      "source": "./fivetran-plugin",
+      "description": "Zero-dependency Fivetran integration for Claude Code. List connections, check sync status, and trigger manual syncs."
     }
   ]
 }
