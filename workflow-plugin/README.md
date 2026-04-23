@@ -1,13 +1,14 @@
 # Workflow Plugin
 
-Agent workflow management tools for Claude Code - handoffs, context preservation, and documentation sync.
+Agent workflow management tools for Claude Code - handoffs, context preservation, documentation sync, and verified PR review.
 
 ## Overview
 
-This plugin provides commands for managing Claude Code session workflows:
+This plugin provides commands and skills for managing Claude Code session workflows:
 
 - **Session Handoffs**: Preserve context when switching sessions
 - **Documentation Sync**: Keep docs updated with code changes
+- **Verified PR Review**: Review PRs with a verify → score → preview → post loop, posting inline comments anchored to specific lines
 
 ## Commands
 
@@ -55,6 +56,21 @@ Review and update local documentation to reflect recent code changes.
 ```
 
 **Best practice:** Run before `/sunset` to ensure documentation is current for handoff.
+
+## Skills
+
+### `reviewing-prs-with-verification`
+
+Auto-triggers when you ask Claude to review a GitHub PR. Enforces a four-phase loop: scan → verify → score → post.
+
+**What it does:**
+- Fetches the PR branch locally and reads real files (not just hunks)
+- Cross-references upstream deps, callers, and language semantics before writing any finding
+- Scores every finding by confidence × severity, with `withdraw` as a first-class action
+- Previews the full review payload before sending
+- Posts as one GitHub review with inline comments anchored to `path` + `line`, pinned to the HEAD commit
+
+**Trigger:** Natural phrasing like "review PR 5577" or "look at this PR" picks it up via skill auto-discovery — no slash command needed.
 
 ## Installation
 
